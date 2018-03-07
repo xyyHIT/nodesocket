@@ -22,7 +22,7 @@ var server = net.createServer(function(socket){
         console.log('client closed!');
         // socket.remoteAddress + ' ' + socket.remotePort);
     });
-}).listen('120.25.76.117',listenPort);
+}).listen(listenPort);
 //服务器监听事件
 server.on('listening',function(){
     console.log("server listening:" + server.address().port);
