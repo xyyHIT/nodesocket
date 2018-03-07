@@ -1,0 +1,7 @@
+{
+  "name": "nodesocket",
+  "version": "1.0.0",
+  "dependencies": {
+    "net": "^1.0.2"
+  }
+}
