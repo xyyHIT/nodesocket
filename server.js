@@ -1,29 +1,25 @@
 var net = require('net');
 //模块引入
 var listenPort = 3000;//监听端口
-var server = net.createServer(function(socket){
-    // 创建socket服务端
-    console.log('connect: ' +
-        socket.remoteAddress + ':' + socket.remotePort);
-    socket.setEncoding('binary');
+var server = net.createServer(function(client){
+    //client.setEncoding('binary');
     //接收到数据
-    socket.on('data',function(data){
-        console.log(socket.remoteAddress +' client send:' + data);
+    client.on('data',function(data){
+        console.log(client.remoteAddress + ' client send ===>' + data);
     });
-    socket.write('Hello client!\r\n');
-    socket.pipe(socket);
+    //client.write('Hello client!\r\n');
     //数据错误事件
-    socket.on('error',function(exception){
+    client.on('error',function(exception){
         console.log('socket error:' + exception);
         socket.end();
     });
     //客户端关闭事件
-    socket.on('close',function(data){
+    client.on('close',function(data){
         console.log('client closed! ===>'+data);
 
         // socket.remoteAddress + ' ' + socket.remotePort);
     });
-    socket.on('end', function () {
+    client.on('end', function () {
         console.log('client end ');
     });
 }).listen(listenPort);
@@ -34,4 +30,8 @@ server.on('listening',function(){
 //服务器错误事件
 server.on("error",function(exception){
     console.log("server error:" + exception);
+});
+//服务器连接事件
+server.on('connection', function (client) {
+    console.log("server connection:" + client.remoteAddress);
 });
