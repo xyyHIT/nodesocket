@@ -10,7 +10,7 @@ var server = net.createServer(function(socket){
     socket.on('data',function(data){
         console.log('client send:' + data);
     });
-    socket.write('Hello client!\r\n');
+    //socket.write('Hello client!\r\n');
     // socket.pipe(socket);
     //数据错误事件
     socket.on('error',function(exception){
@@ -19,8 +19,12 @@ var server = net.createServer(function(socket){
     });
     //客户端关闭事件
     socket.on('close',function(data){
-        console.log('client closed!');
+        console.log('client closed! ===>'+data);
+
         // socket.remoteAddress + ' ' + socket.remotePort);
+    });
+    socket.on('end', function () {
+        console.log('client end ');
     });
 }).listen(listenPort);
 //服务器监听事件
