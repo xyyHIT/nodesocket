@@ -8,10 +8,10 @@ var server = net.createServer(function(socket){
     socket.setEncoding('binary');
     //接收到数据
     socket.on('data',function(data){
-        console.log('client send:' + data);
+        console.log(socket.remoteAddress +' client send:' + data);
     });
     socket.write('Hello client!\r\n');
-    // socket.pipe(socket);
+    socket.pipe(socket);
     //数据错误事件
     socket.on('error',function(exception){
         console.log('socket error:' + exception);
