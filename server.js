@@ -7,7 +7,7 @@ var server = net.createServer(function(socket){
         socket.remoteAddress + ':' + socket.remotePort);
     socket.setEncoding('binary');
     //接收到数据
-    socket.on('data',function(data){
+    socket.on(function(data){
         console.log('client send:' + data);
     });
     //socket.write('Hello client!\r\n');
